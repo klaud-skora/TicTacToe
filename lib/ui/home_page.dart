@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
     void _makeMove(index) {
       setState(() {
         game.setMove(game.playerSign, index);
-        game.freeFields.length > 0 ? game.computerMove() : result = 'End of game!';
+        game.freeFields.length > 0  && game.winner != game.playerSign ? game.computerMove() : result = 'End of game!';
       });
     }
 
