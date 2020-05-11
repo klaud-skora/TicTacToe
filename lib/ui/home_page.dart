@@ -15,14 +15,14 @@ class _MyHomePageState extends State<MyHomePage> {
   bool switchOn = true;
   TicTacToe game = TicTacToe();  
   String result = '';
-  
 
   @override
   Widget build(BuildContext context) {
     void _makeMove(index) {
       setState(() {
         game.setMove(game.playerSign, index);
-        game.freeFields.length > 0  && game.winner != game.playerSign ? game.computerMove() : result = 'End of game!';
+        game.freeFields.length > 0  && game.winner != game.playerSign ? game.computerMove() 
+        : result = 'End of game';
       });
     }
 
@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
               scrollDirection: Axis.vertical,
               itemCount: 9,
               itemBuilder: (contex, index) => GestureDetector(
-                onTap: game.freeFields.contains(index) ? () {
+                onTap: game.freeFields.contains(index) && game.winner == '' ? () {
                   _makeMove(index);
                 } : null,
                 child: Container(
@@ -72,6 +72,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     color: Colors.red.withOpacity(.3),
                   ),
                 ),
+              ),
+            ),
+            FlatButton(
+              onPressed: () {
+                setState(() {
+                  result = '';
+                  game.clearGame();
+                });
+              }, 
+              child: Text('New game'),
+              shape: RoundedRectangleBorder(
+                side: BorderSide(
+                color: Colors.red,
+              ),
+              borderRadius: BorderRadius.circular(30.0),
               ),
             ),
           ],

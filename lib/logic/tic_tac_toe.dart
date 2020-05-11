@@ -2,13 +2,14 @@ import 'dart:math';
 
 class TicTacToe {
   List<int> _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8]; //indexes of free fields
-  List<String> _moves = ['', '', '', '', '', '', '', '', '' ]; // content for fields
+  List<String> _moves = ['', '', '', '', '', '', '', '', '']; // content for fields
   List<int> _playerMoves = [];
   List<int> _computerMoves = [];
 
   String _playerSign = 'x';
   String _computerSign = 'o';
   String winner = '';
+  String draw = 'It\'s a draw';
 
   String get playerSign => _playerSign;
   String get computerSign => _computerSign;
@@ -60,12 +61,15 @@ class TicTacToe {
       ((index == 0 &&  moves[index + 4] == sign && moves[index + 8] == sign ) || (index == 4 &&  moves[index - 4] == sign && moves[index + 4] == sign ) || (index == 8 &&  moves[index - 4] == sign && moves[index - 8] == sign) )
       ) {
         winner = '\'' +  sign + '\'' + ' wins';
-    } 
+    } else if(_freeFields.length == 0 ) {
+      winner = 'It\s a draw !';
+    }
   }
 
   clearGame() {
     _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     _moves = ['', '', '', '', '', '', '', '', ''];
+    winner = '';
   }
 
 }
