@@ -15,6 +15,7 @@ class _MyHomePageState extends State<MyHomePage> {
   bool switchOn = true;
   TicTacToe game = TicTacToe();  
   String result = '';
+  
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(game.winner),
             Text(result),
             Text('You play as ${switchOn ? 'cross' : 'donut'}' ),
             Switch(

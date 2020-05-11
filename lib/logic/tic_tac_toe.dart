@@ -59,7 +59,7 @@ class TicTacToe {
       ||
       ((index == 0 &&  moves[index + 4] == sign && moves[index + 8] == sign ) || (index == 4 &&  moves[index - 4] == sign && moves[index + 4] == sign ) || (index == 8 &&  moves[index - 4] == sign && moves[index - 8] == sign) )
       ) {
-        winner = sign;
+        winner = '\'' +  sign + '\'' + ' wins';
     } 
   }
 
