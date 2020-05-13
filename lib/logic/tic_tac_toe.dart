@@ -10,6 +10,7 @@ class TicTacToe {
   String _computerSign = 'o';
   String winner = '';
   String draw = 'It\'s a draw';
+  String result = '';
 
   String get playerSign => _playerSign;
   String get computerSign => _computerSign;
@@ -21,6 +22,13 @@ class TicTacToe {
     _freeFields.remove(index);
     sign == playerSign ? _playerMoves.add(index) : _computerMoves.add(index);
     getWinner(sign, index);
+
+  }
+
+  move(sign, index) {
+    setMove(sign, index);
+    freeFields.length > 0  && winner != playerSign ? computerMove() 
+        : result = 'End of game';
   }
 
   void computerMove() {
@@ -70,6 +78,7 @@ class TicTacToe {
     _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     _moves = ['', '', '', '', '', '', '', '', ''];
     winner = '';
+    result = '';
   }
 
 }

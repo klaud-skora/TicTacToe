@@ -14,15 +14,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
   bool switchOn = true;
   TicTacToe game = TicTacToe();  
-  String result = '';
 
   @override
   Widget build(BuildContext context) {
     void _makeMove(index) {
       setState(() {
-        game.setMove(game.playerSign, index);
-        game.freeFields.length > 0  && game.winner != game.playerSign ? game.computerMove() 
-        : result = 'End of game';
+        game.move(game.playerSign, index);
       });
     }
 
@@ -35,7 +32,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(game.winner),
-            Text(result),
+            Text(game.result),
             Text('You play as ${switchOn ? 'cross' : 'donut'}' ),
             Switch(
               value: switchOn,
@@ -76,10 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             FlatButton(
               onPressed: () {
-                setState(() {
-                  result = '';
-                  game.clearGame();
-                });
+                setState(() { game.clearGame(); });
               }, 
               child: Text('New game'),
               shape: RoundedRectangleBorder(
