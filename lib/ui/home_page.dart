@@ -18,11 +18,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     void _makeMove(index) {
-      setState(() {
-        game.move(game.playerSign, index);
-      });
+      setState(() { game.move(game.playerSign, index); });
     }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
