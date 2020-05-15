@@ -18,7 +18,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     void _makeMove(index) {
-      setState(() { game.move(game.playerSign, index); });
+      setState(() { game.move(game.player, index); });
     }
     return Scaffold(
       appBar: AppBar(
@@ -28,8 +28,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(game.winner),
-            Text(game.result),
             Text('You play as ${switchOn ? 'cross' : 'donut'}' ),
             Switch(
               value: switchOn,
@@ -49,13 +47,13 @@ class _MyHomePageState extends State<MyHomePage> {
               scrollDirection: Axis.vertical,
               itemCount: 9,
               itemBuilder: (contex, index) => GestureDetector(
-                onTap: game.freeFields.contains(index) && game.winner == '' ? () {
+                onTap: game.freeFields.contains(index) && game.winner == null ? () {
                   _makeMove(index);
                 } : null,
                 child: Container(
                   alignment: Alignment(0.0,0.0),
                   child: Text(
-                    game.moves[index],
+                    game.moves[index].content,
                     style: TextStyle(
                       fontSize: 44,
                       color: Colors.grey.shade100,

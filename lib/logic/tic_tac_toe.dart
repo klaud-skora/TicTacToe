@@ -1,46 +1,71 @@
 import 'dart:math';
+import '../ui/sign_extension.dart';
+
+enum Sign {
+  cross,
+  donut,
+}
+
+enum Move {
+  X,
+  O,
+  Blank,
+}
+
+extension MoveExtension on Move {
+  static final contents = {
+    Move.X: Sign.cross.value,
+    Move.O: Sign.donut.value,
+    Move.Blank: '',
+  };
+
+  String get content => contents[this];
+}
 
 class TicTacToe {
   List<int> _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8]; //indexes of free fields
-  List<String> _moves = ['', '', '', '', '', '', '', '', '']; // content for fields
+  List<Move> _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
 
-  String _playerSign = 'x';
-  String _computerSign = 'o';
-  String winner = '';
+  Sign _player = Sign.cross;
+  Sign _computer = Sign.donut;
+  Sign _winner;
   String result = '';
 
-  String get playerSign => _playerSign;
-  String get computerSign => _computerSign;
+  Sign get player => _player;
+  Sign get computer => _computer;
+  Sign get winner => _winner;
+
   List<int> get freeFields => _freeFields;
-  List<String> get moves => _moves; 
+  List<Move> get moves => _moves; 
 
   void setMove(sign, index) {
-    _moves[index] = sign;
+    print(sign);
+    _moves[index] = sign == Sign.cross ? Move.X : Move.O;
     _freeFields.remove(index);
     getWinner(sign, index);
   }
 
   move(sign, index) {
     setMove(sign, index);
-    freeFields.length > 0  && winner == '' ? computerMove() 
+    freeFields.length > 0  && winner == null ? computerMove() 
         : result = 'End of game';
   }
 
   void computerMove() {
     var random = new Random();
     int computerTurn = random.nextInt(8);
-    _freeFields.contains(computerTurn) ? setMove(computerSign, computerTurn) : computerMove();
+    _freeFields.contains(computerTurn) ? setMove(computer, computerTurn) : computerMove();
   }
 
   setSigns() {
-    switch(_playerSign) {
-      case 'x': 
-        _playerSign = 'o';
-        _computerSign = 'x';
+    switch(_player) {
+      case Sign.cross: 
+        _player = Sign.donut;
+        _computer = Sign.cross;
         break;
-      case 'o':
-        _playerSign = 'x';
-        _computerSign = 'o';
+      case Sign.donut:
+        _player = Sign.cross;
+        _computer = Sign.donut;
         break;
     }
   }
@@ -63,16 +88,13 @@ class TicTacToe {
       ||
       ((index == 0 &&  moves[index + 4] == sign && moves[index + 8] == sign ) || (index == 4 &&  moves[index - 4] == sign && moves[index + 4] == sign ) || (index == 8 &&  moves[index - 4] == sign && moves[index - 8] == sign) )
       ) {
-        winner = '\'' +  sign + '\'' + ' wins';
-    } else if(_freeFields.length == 0 ) {
-      winner = 'It\s a draw !';
-    }
+        _winner = Sign.cross.value == sign ? Sign.cross : Sign.donut;
+    } 
   }
 
   clearGame() {
     _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    _moves = ['', '', '', '', '', '', '', '', ''];
-    winner = '';
+   _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
     result = '';
   }
 
