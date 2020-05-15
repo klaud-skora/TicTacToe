@@ -3,8 +3,6 @@ import 'dart:math';
 class TicTacToe {
   List<int> _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8]; //indexes of free fields
   List<String> _moves = ['', '', '', '', '', '', '', '', '']; // content for fields
-  List<int> _playerMoves = [];
-  List<int> _computerMoves = [];
 
   String _playerSign = 'x';
   String _computerSign = 'o';
@@ -19,7 +17,6 @@ class TicTacToe {
   void setMove(sign, index) {
     _moves[index] = sign;
     _freeFields.remove(index);
-    sign == playerSign ? _playerMoves.add(index) : _computerMoves.add(index);
     getWinner(sign, index);
   }
 
