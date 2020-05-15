@@ -20,10 +20,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     void _makeMove(index) {
-      print('makemove');
       setState(() { game.move(game.player.value, index); });
     }
-    print(game.state);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -84,15 +82,15 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ],
         ) : Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(game.state.toString()),
+            SizedBox(height: 200.0),
+            Text(game.gameResult.info),
+            SizedBox(height: 10.0),
+            Text(game.winner.value == null ? '' : game.winner.value == game.player.value ? 'Congrats !' : 'Sorry, you lose' ),
+            SizedBox(height: 20.0),
             FlatButton(
               onPressed: () {
-                setState(() { 
-                  
-                  game.clearGame(); 
-                });
+                setState(() { game.clearGame(); });
               }, 
               child: Text('New game'),
               shape: RoundedRectangleBorder(

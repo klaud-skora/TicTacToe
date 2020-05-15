@@ -54,20 +54,32 @@ class TicTacToe {
   Sign _player = Sign.cross;
   Sign _computer = Sign.donut;
   Sign _winner;
+  FinishedGameResult _gameResult;
 
   Sign get player => _player;
   Sign get computer => _computer;
   Sign get winner => _winner;
+  FinishedGameResult get gameResult => _gameResult;
 
   List<int> get freeFields => _freeFields;
   List<Move> get moves => _moves; 
 
-    Result get state {
-      if (freeFields.length == 0){
-        return GameEnded(FinishedGameResult.Draw);
-      } else if(isWinner()) {
-      return winner.value == Sign.cross.value ? GameEnded(FinishedGameResult.X) : GameEnded(FinishedGameResult.O); 
-      } else {
+  Result get state {
+    var returnStatement;
+    if (freeFields.length == 0){
+      _gameResult = FinishedGameResult.Draw;
+      return GameEnded(FinishedGameResult.Draw);
+    } else if(isWinner()) {
+        if(winner.value == Sign.cross.value) {
+          _gameResult = FinishedGameResult.X;
+          returnStatement = GameEnded(FinishedGameResult.X);
+        }
+        if(winner.value == Sign.donut.value) {
+          _gameResult = FinishedGameResult.O;
+          returnStatement = GameEnded(FinishedGameResult.O);
+        }
+      return returnStatement;
+    } else {
       return GameInProgress();
     }
   }
