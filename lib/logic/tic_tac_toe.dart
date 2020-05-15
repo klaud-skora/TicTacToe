@@ -29,13 +29,13 @@ enum FinishedGameResult {
 }
 
 extension FinishedGameResultExtension on FinishedGameResult {
-  static final results = {
+  static final infos = {
     FinishedGameResult.X: '\'x\' won the game',
     FinishedGameResult.O: '\'o\' won the game',
     FinishedGameResult.Draw: 'It\' a draw !',
   };
 
-  String get result => results[this];
+  String get info => infos[this];
 }
 
 abstract class Result {}
@@ -73,7 +73,7 @@ class TicTacToe {
   }
 
   bool isWinner() {
-    return winner.value.length > 0;
+    return winner.value != null;
   }
 
   void setMove(sign, index) {
@@ -85,7 +85,6 @@ class TicTacToe {
   move(sign, index) {
     setMove(sign, index);
     freeFields.length > 0  && winner == null ? computerMove() : print('null');
-
     //computerMove();
   }
 
