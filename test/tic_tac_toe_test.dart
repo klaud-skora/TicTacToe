@@ -1,15 +1,13 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:tictactoe/logic/tic_tac_toe.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:tictactoe/logic/tic_tac_toe.dart';
 
+void main() {
 
-// void main() {
+  TicTacToe ttt = TicTacToe();
 
-//   TicTacToe ticTacToe = TicTacToe();
+  test('Make 1 move', () {
+    ttt.move('x', 0);
+    expect((ttt.state is GameInProgress),  true);
+  });
 
-//   test('Make 1 move', () {
-    
-
-//   });
-
-// }
+}
