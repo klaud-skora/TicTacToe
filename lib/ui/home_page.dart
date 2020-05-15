@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tictactoe/logic/tic_tac_toe.dart';
 
+import './sign_extension.dart';
+
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
 
@@ -18,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     void _makeMove(index) {
-      setState(() { game.move(game.player, index); });
+      setState(() { game.move(game.player.value, index); });
     }
     return Scaffold(
       appBar: AppBar(
