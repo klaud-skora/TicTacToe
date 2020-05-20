@@ -1,5 +1,5 @@
-import 'dart:math';
 import '../ui/sign_extension.dart';
+import './cpu_moves.dart';
 
 enum Sign {
   cross,
@@ -47,6 +47,10 @@ class GameEnded extends Result {
   GameEnded(this.result);	
 }
 
+abstract class CpuMoves {
+ 
+}
+
 class TicTacToe {
   List<Move> _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
 
@@ -54,6 +58,8 @@ class TicTacToe {
   Sign _computer = Sign.donut;
   Sign _winner;
   FinishedGameResult _gameResult;
+
+  RandomCpuMove cpu = RandomCpuMove();
 
   Sign get player => _player;
   Sign get computer => _computer;
@@ -93,15 +99,12 @@ class TicTacToe {
 
   move(sign, index) {
     setMove(sign, index);
-    moves.contains(Move.Blank)  && winner == null ? computerMove() : print('null');
-    //computerMove();
+    if(moves.contains(Move.Blank)  && winner == null) getCpuMove();
   }
 
-  void computerMove() {
-    var random = new Random();
-    int computerTurn = random.nextInt(8);
-    moves[computerTurn] == Move.Blank ? setMove(computer.value, computerTurn) : computerMove();
-
+  void getCpuMove() {
+    int cpuMove = cpu.move(moves);
+    moves[cpuMove] == Move.Blank ? setMove(computer.value, cpuMove) : getCpuMove();
   }
 
   setSigns() {
@@ -141,8 +144,8 @@ class TicTacToe {
 
   clearGame() {
     _winner = null;
-   _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
-   // _moves.forEach((element) {element = Move.Blank; });
+    _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
+    // _moves.forEach((element) {element = Move.Blank; });
   }
 
 }
