@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 scrollDirection: Axis.vertical,
                 itemCount: 9,
                 itemBuilder: (contex, index) => GestureDetector(
-                  onTap: game.freeFields.contains(index) && game.isWinner() == false ? () {
+                  onTap: game.moves[index] == Move.Blank && game.isWinner() == false ? () {
                     _makeMove(index);
                   } : null,
                   child: Container(

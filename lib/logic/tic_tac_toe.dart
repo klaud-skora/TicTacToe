@@ -48,7 +48,6 @@ class GameEnded extends Result {
 }
 
 class TicTacToe {
-  List<int> _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8]; //indexes of free fields
   List<Move> _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
 
   Sign _player = Sign.cross;
@@ -61,12 +60,11 @@ class TicTacToe {
   Sign get winner => _winner;
   FinishedGameResult get gameResult => _gameResult;
 
-  List<int> get freeFields => _freeFields;
   List<Move> get moves => _moves; 
 
   Result get state {
     var returnStatement;
-    if (freeFields.length == 0){
+    if (!moves.contains(Move.Blank) && !isWinner()){
       _gameResult = FinishedGameResult.Draw;
       return GameEnded(FinishedGameResult.Draw);
     } else if(isWinner()) {
@@ -90,20 +88,20 @@ class TicTacToe {
 
   void setMove(sign, index) {
     _moves[index] = sign == Sign.cross.value ? Move.X : Move.O;
-    _freeFields.remove(index);
     getWinner(sign, index);
   }
 
   move(sign, index) {
     setMove(sign, index);
-    freeFields.length > 0  && winner == null ? computerMove() : print('null');
+    moves.contains(Move.Blank)  && winner == null ? computerMove() : print('null');
     //computerMove();
   }
 
   void computerMove() {
     var random = new Random();
     int computerTurn = random.nextInt(8);
-    _freeFields.contains(computerTurn) ? setMove(computer.value, computerTurn) : computerMove();
+    moves[computerTurn] == Move.Blank ? setMove(computer.value, computerTurn) : computerMove();
+
   }
 
   setSigns() {
@@ -143,7 +141,6 @@ class TicTacToe {
 
   clearGame() {
     _winner = null;
-    _freeFields = [0, 1, 2, 3, 4, 5, 6, 7, 8];
    _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
    // _moves.forEach((element) {element = Move.Blank; });
   }
