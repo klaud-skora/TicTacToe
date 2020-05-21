@@ -23,6 +23,7 @@ class TestCpuMoves extends CpuMoves {
 
 	TestCpuMoves(this.moves);
 
+  @override
 	int move(List<Move> board) {
 		return moves[currentIndex++];
 	}
