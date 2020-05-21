@@ -129,7 +129,7 @@ class TicTacToe {
       ||
       ((index == 2 || index == 5 || index == 8) && moves[index - 1].content == sign && moves[index - 2].content == sign )
       ||
-      ((index == 2 &&  moves[index + 2].content == sign && moves[index + 4].content == sign ) || (index == 4 &&  moves[index + 2].content == sign && moves[index - 2].content == sign ) || (index == 8 &&  moves[index - 2].content == sign && moves[index - 4].content == sign) )
+      ((index == 2 &&  moves[index + 2].content == sign && moves[index + 4].content == sign ) || (index == 4 &&  moves[index + 2].content == sign && moves[index - 2].content == sign ) || (index == 6 &&  moves[index - 2].content == sign && moves[index - 4].content == sign) )
       ||
       ((index == 0 &&  moves[index + 4].content == sign && moves[index + 8].content == sign ) || (index == 4 &&  moves[index - 4].content == sign && moves[index + 4].content == sign ) || (index == 8 &&  moves[index - 4].content == sign && moves[index - 8].content == sign) )
       ) {

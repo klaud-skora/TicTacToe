@@ -53,6 +53,17 @@ void main() {
     expect(ttt.gameResult, FinishedGameResult.X);
   });
 
+  test('result for computer\'s win - playing with x 2', () {
+  CpuMoves testMoves = TestCpuMoves([2,4,6]);
+  TicTacToe ttt = TicTacToe(testMoves);
+  ttt.setSigns();
+  ttt.move('o', 0);
+  ttt.move('o', 1);
+  ttt.move('o', 3);
+  expect((ttt.state is GameEnded),  true);
+  expect(ttt.gameResult, FinishedGameResult.X);
+});
+
   test('result for draw for player = x && computer = o', () {
     CpuMoves testMoves = TestCpuMoves([1, 4, 6, 5]);
     TicTacToe ttt = TicTacToe(testMoves);
@@ -66,14 +77,14 @@ void main() {
   });
 
   test('result for draw for player = o && computer = x', () {
-    CpuMoves testMoves = TestCpuMoves([4, 3, 2, 6]);
+    CpuMoves testMoves = TestCpuMoves([2, 4, 0, 7]);
     TicTacToe ttt = TicTacToe(testMoves);
     ttt.setSigns();
-    ttt.move('o', 0);
-    ttt.move('o', 5);
-    ttt.move('o', 8);
-    ttt.move('o', 7);
+    ttt.move('o', 3);
     ttt.move('o', 1);
+    ttt.move('o', 6);
+    ttt.move('o', 8);
+    ttt.move('o', 5);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.Draw);
   });
