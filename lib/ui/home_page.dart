@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import './sign_extension.dart';
 import 'package:tictactoe/logic/tic_tac_toe.dart';
+import '../logic/cpu_moves.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -15,7 +16,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
 
   bool switchOn = true;
-  TicTacToe game = TicTacToe();  
+  static RandomCpuMove cpu = RandomCpuMove();
+  TicTacToe game = TicTacToe(cpu);  
 
   @override
   Widget build(BuildContext context) {

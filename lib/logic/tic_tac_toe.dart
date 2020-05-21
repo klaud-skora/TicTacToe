@@ -1,5 +1,4 @@
 import '../ui/sign_extension.dart';
-import './cpu_moves.dart';
 
 enum Sign {
   cross,
@@ -47,19 +46,15 @@ class GameEnded extends Result {
   GameEnded(this.result);	
 }
 
-abstract class CpuMoves {
- 
-}
-
 class TicTacToe {
+  final cpu;
+  TicTacToe(this.cpu);
   List<Move> _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
 
   Sign _player = Sign.cross;
   Sign _computer = Sign.donut;
   Sign _winner;
   FinishedGameResult _gameResult;
-
-  RandomCpuMove cpu = RandomCpuMove();
 
   Sign get player => _player;
   Sign get computer => _computer;
@@ -145,7 +140,7 @@ class TicTacToe {
   clearGame() {
     _winner = null;
     _moves = [Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank, Move.Blank ];
-    // _moves.forEach((element) {element = Move.Blank; });
+    // _moves.forEach((move) {move = Move.Blank; });
   }
 
 }
