@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import '../lib/logic/tic_tac_toe.dart';
 import '../lib/logic/cpu_moves.dart';
-import '../lib/ui/sign_extension.dart';
 
 void main() {
   
@@ -20,7 +19,6 @@ void main() {
     ttt.move('x', 8);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.X);
-    expect(ttt.gameResult.info, '\'${ttt.player.value}\' won the game');
   });
 
   test('result for computer\'s win - playing with o', () {
@@ -31,7 +29,6 @@ void main() {
     ttt.move('x', 8);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.O);
-    expect(ttt.gameResult.info, '\'${ttt.computer.value}\' won the game');
   });
 
   test('result for player\'s win - playing with o', () {
@@ -43,7 +40,6 @@ void main() {
     ttt.move('o', 8);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.O);
-    expect(ttt.gameResult.info, '\'${ttt.player.value}\' won the game');
   });
 
   test('result for computer\'s win - playing with x', () {
@@ -55,7 +51,6 @@ void main() {
     ttt.move('x', 3);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.X);
-    expect(ttt.gameResult.info, '\'${ttt.computer.value}\' won the game');
   });
 
   test('result for draw for player = x && computer = o', () {
@@ -68,7 +63,6 @@ void main() {
     ttt.move('x', 2);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.Draw);
-    expect(ttt.gameResult.info, 'It\' a draw !');
   });
 
   test('result for draw for player = o && computer = x', () {
@@ -82,7 +76,6 @@ void main() {
     ttt.move('o', 1);
     expect((ttt.state is GameEnded),  true);
     expect(ttt.gameResult, FinishedGameResult.Draw);
-    expect(ttt.gameResult.info, 'It\' a draw !');
   });
 
 }
